@@ -807,20 +807,9 @@ bool nextRegistrationIsHighPriority = NO;
     [request setHTTPBody:postData];
     
     [OneSignalHelper enqueueRequest:request onSuccess:nil onFailure:nil];
-    
-    if ([[UIApplication sharedApplication] applicationState] != UIApplicationStateActive && openUrl) {
-        
-        if ([OneSignalHelper verifyURL:openUrl])
-        dispatch_async(dispatch_get_main_queue(), ^{
-            NSURL *url = [NSURL URLWithString:openUrl];
-            [OneSignalHelper displayWebView:url];
-        });
-    }
-    
+
     [OneSignalHelper lastMessageReceived:messageDict];
-    
-    [self clearBadgeCount:true];
-    
+
     
     NSString* actionID = NULL;
     if (actionType == ActionTaken) {
