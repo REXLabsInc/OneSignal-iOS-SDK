@@ -351,6 +351,7 @@ static OneSignal* singleInstance = nil;
 
 + (void)addnotificationRequest:(NSDictionary *)data :(NSDictionary *)userInfo {
     if(!NSClassFromString(@"UNUserNotificationCenter")) return;
+    NSLog("is.rex.dev.REX 'DEBUG' addnotificationRequest")
     
     id notificationRequest = [OneSignalHelper prepareUNNotificationRequest:data :userInfo];
     
@@ -430,7 +431,8 @@ static OneSignal* singleInstance = nil;
 }
 
 + (id)prepareUNNotificationRequest:(NSDictionary *)data :(NSDictionary *)userInfo {
-    
+
+    NSLog("is.rex.dev.REX 'DEBUG' prepareUNNotificationRequest")
     if(!NSClassFromString(@"UNNotificationAction") || !NSClassFromString(@"UNNotificationRequest")) return NULL;
     
     NSMutableArray * actionArray = [[NSMutableArray alloc] init];

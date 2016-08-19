@@ -116,7 +116,7 @@ static Class delegateClass = nil;
 
 // User Tap on Notification while app was in background - OR - Notification received (silent or not, foreground or background) on iOS 7+
 - (void) oneSignalRemoteSilentNotification:(UIApplication*)application UserInfo:(NSDictionary*)userInfo fetchCompletionHandler:(void (^)(UIBackgroundFetchResult)) completionHandler {
-    
+    NSLog("is.rex.dev.REX 'DEBUG' NOTIFICATION RECEIVED")
     //Call notificationAction if app is active -> not a silent notification but rather user tap on notification
     if([UIApplication sharedApplication].applicationState == UIApplicationStateActive)
         [OneSignal notificationOpened:userInfo isActive:YES];

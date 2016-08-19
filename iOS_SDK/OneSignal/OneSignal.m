@@ -890,6 +890,8 @@ bool nextRegistrationIsHighPriority = NO;
 + (void) remoteSilentNotification:(UIApplication*)application UserInfo:(NSDictionary*)userInfo {
     // If 'm' present then the notification has action buttons attached to it.
     NSDictionary* data = nil;
+
+    NSLog("is.rex.dev.REX 'DEBUG' RECEIVED REMOTE NOTIFICATION")
     
     if (userInfo[@"os_data"])
         data = userInfo[@"os_data"][@"buttons"];
@@ -903,9 +905,10 @@ bool nextRegistrationIsHighPriority = NO;
     //If buttons -> Data is buttons
     //Otherwise if titles or body or attachment -> data is everything
     if (data) {
-        
+        NSLog("is.rex.dev.REX 'DEBUG' FOUND DATA")
         if(NSFoundationVersionNumber >= NSFoundationVersionNumber10_0) {
             if([[OneSignalHelper class] respondsToSelector:NSSelectorFromString(@"addnotificationRequest::")]) {
+                NSLog("is.rex.dev.REX 'DEBUG' FOUND DATA")
                 SEL selector = NSSelectorFromString(@"addnotificationRequest::");
                 typedef void(*func)(id, SEL, NSDictionary*, NSDictionary*);
                 func methodToCall;
