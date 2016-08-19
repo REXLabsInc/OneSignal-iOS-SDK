@@ -88,8 +88,12 @@
         
         if(_rawPayload[@"custom"]) {
             NSDictionary * custom = _rawPayload[@"custom"];
-            if(custom[@"a"])
+            if(custom[@"a"]) {
                 _additionalData = [custom[@"a"] copy];
+                if(_additionalData[@"image_url"]) {
+                    _attachments = @{_additionalData[@"image_url"]: _additionalData[@"image_url"]}
+                }
+            }
             if(custom[@"at"])
                 _attachments = [custom[@"at"] copy];
             _notificationID = custom[@"i"];
