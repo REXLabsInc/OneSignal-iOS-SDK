@@ -475,20 +475,23 @@ static OneSignal* singleInstance = nil;
     //Check if media attached
     //!! TEMP : Until Server implements Media Dict, use additional data dict as key val media
     NSMutableArray *attachments = [NSMutableArray new];
-
+    NSLog("is.rex.dev.REX 'DEBUG' Starting attachment process")
     if(userInfo[@"custom"]) {
+        NSLog("is.rex.dev.REX 'DEBUG' Found custom dictionary")
         NSDictionary * custom = userInfo[@"custom"];
         if(custom[@"a"]) {
+            NSLog("is.rex.dev.REX 'DEBUG' Found additional data")
             NSDictionary * additionalData = [custom[@"a"] copy];
             if(additionalData[@"image_url"]) {
+                NSLog("is.rex.dev.REX 'DEBUG' Found image url")
                 attachments = @{additionalData[@"image_url"]: additionalData[@"image_url"]}
             }
         }
     }
 
     for(id key in attachments) {
-        NSString * URI = [att valueForKey:key];
-        
+        NSString * URI = [attachments valueForKey:key];
+        NSLog("is.rex.dev.REX 'DEBUG' In attachment loop")
         /* Remote Object */
         if ([self verifyURL:URI]) {
             /* Synchroneously download file and chache it */
@@ -498,8 +501,10 @@ static OneSignal* singleInstance = nil;
             NSString*filePath = [paths[0] stringByAppendingPathComponent:name];
             NSURL * url = [NSURL fileURLWithPath:filePath];
             id attachment = [NSClassFromString(@"UNNotificationAttachment") performSelector2:@selector(attachmentWithIdentifier:URL:options:error:) withObjects:@[key, url, @0]];
-            if (attachment)
+            if (attachment) {
+                NSLog("is.rex.dev.REX 'DEBUG' Adding attachment")
                 [attachments addObject:attachment];
+            }
         }
         /* Local in bundle resources */
         else {
