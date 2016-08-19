@@ -825,7 +825,7 @@ bool nextRegistrationIsHighPriority = NO;
     NSDictionary* customDict = [messageDict objectForKey:@"os_data"];
     if (customDict == nil)
         customDict = [messageDict objectForKey:@"custom"];
-    
+
     // Notify backend that user opened the notifiation
     NSString* messageId = [customDict objectForKey:@"i"];
     [OneSignal submitNotificationOpened:messageId];
